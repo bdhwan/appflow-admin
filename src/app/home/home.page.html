@@ -1,0 +1,94 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Appflow<ion-button (click)="clickEditEndPoint()">변경</ion-button>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-container *ngIf="readyToRender">
+
+    <ng-container *ngIf="!api_server">
+      <div class="ion-padding">
+
+        <div>
+          <ion-label>
+            apiendpoint:
+          </ion-label>
+          <ion-input #endPointInput></ion-input>
+          <ion-button (click)="clickSaveEndPoint(endPointInput.value)">저장</ion-button>
+        </div>
+
+
+      </div>
+    </ng-container>
+    <ng-container *ngIf="api_server">
+      <div class="ion-padding">
+        <ion-list>
+          <ion-item-divider>
+
+            <ion-label>
+              endpoint:{{api_server}}
+            </ion-label>
+            <ion-label>
+              Build
+            </ion-label>
+          </ion-item-divider>
+          <ion-item>
+            <ion-button (click)="clickBuild()">build</ion-button>
+          </ion-item>
+
+          <ion-item-divider>
+            <ion-label>
+              Meta data
+            </ion-label>
+          </ion-item-divider>
+          <ion-item-group>
+            <ion-item>
+              <ion-label>app_id:{{meta.app_id}}</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>git_url:{{meta.git_url}}</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>storage_path:{{meta.storage_path}}</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>cache_url:{{meta.cache_url}}</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>endpoint:{{meta.endpoint}}</ion-label>
+            </ion-item>
+          </ion-item-group>
+
+
+          <ion-item-divider>
+            <ion-label>
+              Build History
+            </ion-label>
+          </ion-item-divider>
+          <ion-radio-group [value]="snapshot">
+            <ion-item-group *ngFor="let item of items">
+              <ion-item lines="none" text-wrap>
+                <ion-label>snapshot: {{item.snapshot}}</ion-label>
+                <ion-label>url: {{item.url}}</ion-label>
+                <ion-label>regist_datetime: {{item.regist_datetime}}</ion-label>
+                <ion-label>duration: {{item.build_duration}} ms</ion-label>
+              </ion-item>
+
+              <ion-item lines="none">
+                <ion-radio *ngIf="item.snapshot" slot="end" [value]="item.snapshot" (ionSelect)="clickChange($event,item)"></ion-radio>
+              </ion-item>
+            </ion-item-group>
+          </ion-radio-group>
+
+
+
+        </ion-list>
+      </div>
+    </ng-container>
+
+
+  </ng-container>
+</ion-content>
