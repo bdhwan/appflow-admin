@@ -17,7 +17,14 @@
             apiendpoint:
           </ion-label>
           <ion-input #endPointInput></ion-input>
-          <ion-button (click)="clickSaveEndPoint(endPointInput.value)">저장</ion-button>
+
+          <ion-label>
+            password:
+          </ion-label>
+          <ion-input #endPointPassword></ion-input>
+
+
+          <ion-button (click)="clickSaveEndPoint(endPointInput.value, endPointPassword.value)">저장</ion-button>
         </div>
 
 
