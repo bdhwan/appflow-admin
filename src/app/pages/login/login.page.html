@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div>
+    api_server:
+    <ion-input #apiServerInput></ion-input>
+
+    user_id:
+    <ion-input #userIdInput></ion-input>
+
+    password:
+    <ion-input #userPwInput type="password"></ion-input>
+    <ion-button [disabled]="!(apiServerInput.value&&userIdInput.value&&userPwInput.value)" (click)="clickLogin(apiServerInput.value,userIdInput.value,userPwInput.value)">Login</ion-button>
+  </div>
+
+</ion-content>

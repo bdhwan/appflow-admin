@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Appflow</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ng-container *ngIf="readyToRender">
+    <div>
+      <ion-button (click)="clickLogout()">Logout</ion-button>
+      <h1>Apps {{api_server}}</h1>
+      <div>
+        <ion-button (click)="app.go('new-app')">New App</ion-button>
+      </div>
+      <div>
+        <div *ngFor="let item of apps" (click)="clickApp(item)">
+          <div>
+            <h6>{{item.apps_idx}} - {{item.app_id}} ({{item.channel_name}})</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div *ngIf="selected_app">
+
+      <h1>{{selected_app.app_id}}</h1>
+      <ion-button (click)="app.go('new-app/'+selected_apps_idx)">Edit</ion-button>
+      <div>
+        <h6>git_url: {{selected_app.git_url}}</h6>
+        <h6 *ngIf="selected_app.git_user_id">git_user_id: {{selected_app.git_user_id}}</h6>
+        <h6 *ngIf="selected_app.git_user_pw">git_user_pw: <span>***</span></h6>
+
+      </div>
+
+      <div>
+        <h3>설정</h3>
+        <h4>Ionic</h4>
+        <h6>ionic cordova plugin add cordova-plugin-ionic --save --variable APP_ID="{{selected_app.app_id}}" --variable CHANNEL_NAME="{{selected_app.channel_name}}" --variable UPDATE_METHOD="auto" --variable MAX_STORE="3" --variable UPDATE_API="{{selected_app.endpoint}}"</h6>
+
+        <h4>Webhook</h4>
+        <h6>{{meta_data.build_server_url}}/apps/trigger_app_build/{{selected_apps_idx}}</h6>
+
+      </div>
+
+
+
+      <div>
+
+
+      </div>
+
+
+      <h1>Build history</h1>
+      <div>
+        <ion-button (click)="clickBuild()">Build</ion-button>
+      </div>
+      <div *ngFor="let item of build_history">
+        <div>
+          ID: {{item.build_history_idx}}, stauts:{{item.status}}, enabled: {{item.enabled}}<br>
+          log:{{item.log}}
+          <ion-button [hidden]="!item.apps_version_idx" (click)="clickEnable(item.apps_version_idx)">활성화</ion-button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+
+</ion-content>

@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>new-app</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div *ngIf="readyToRender">
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <ion-item>
+        <ion-label>app_id</ion-label>
+        <ion-input type="text" formControlName="app_id"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>channel_name</ion-label>
+        <ion-input type="text" formControlName="channel_name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>git_url</ion-label>
+        <ion-input type="text" formControlName="git_url"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>git git_user_id</ion-label>
+        <ion-input type="text" formControlName="git_user_id"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>git git_user_pw</ion-label>
+        <ion-input type="text" formControlName="git_user_pw"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>cache_url</ion-label>
+        <ion-input type="text" formControlName="cache_url"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>endpoint</ion-label>
+        <ion-input type="text" formControlName="endpoint"></ion-input>
+      </ion-item>
+
+
+      <ion-button type="submit">Submit</ion-button>
+    </form>
+
+
+  </div>
+
+</ion-content>

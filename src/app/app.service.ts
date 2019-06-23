@@ -214,8 +214,8 @@ export class AppService {
         },
 
         //request build
-        trigger_app_build: async () => {
-            return await this.rest.get(this.getValue('api_server') + '/apps/trigger_app_build').toPromise();
+        trigger_app_build: async (apps_idx) => {
+            return await this.rest.get(this.getValue('api_server') + '/apps/trigger_app_build/' + apps_idx).toPromise();
         },
 
         //select_meta_data
@@ -226,6 +226,29 @@ export class AppService {
         //select_meta_data
         update_current_app_version: async (apps_version_idx) => {
             return await this.rest.post(this.getValue('api_server') + '/apps/update_current_app_version', { apps_version_idx: apps_version_idx }).toPromise();
+        },
+
+        //select_meta_data
+        login: async (user_id, password) => {
+            return await this.rest.post(this.getValue('api_server') + '/apps/login', { user_id: user_id, password: password }).toPromise();
+        },
+        new_app: async (value) => {
+            return await this.rest.post(this.getValue('api_server') + '/apps/new_app', value).toPromise();
+        },
+        update_app: async (value) => {
+            return await this.rest.post(this.getValue('api_server') + '/apps/update_app', value).toPromise();
+        },
+        delete_app: async (apps_idx) => {
+            return await this.rest.post(this.getValue('api_server') + '/apps/delete_app', { apps_idx: apps_idx }).toPromise();
+        },
+        get_app: async (apps_idx) => {
+            return await this.rest.post(this.getValue('api_server') + '/apps/get_app', { apps_idx: apps_idx }).toPromise();
+        },
+        select_apps: async () => {
+            return await this.rest.post(this.getValue('api_server') + '/apps/select_apps', {}).toPromise();
+        },
+        find_build_list: async (apps_idx, page_no, count_per_page) => {
+            return await this.rest.post(this.getValue('api_server') + '/apps/find_build_list', { apps_idx: apps_idx, page_no: page_no, count_per_page: count_per_page }).toPromise();
         },
 
     }
