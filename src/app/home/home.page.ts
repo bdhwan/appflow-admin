@@ -34,17 +34,13 @@ export class HomePage implements OnInit {
 
   }
 
-  async clickSaveEndPoint(value, password) {
+  async clickSaveEndPoint(value) {
     if (!value.startsWith('http')) {
       this.app.setValue('api_server', 'http://' + value);
     }
     else {
       this.app.setValue('api_server', value);
     }
-
-    this.app.setValue('password', password);
-
-
 
     this.api_server = value;
 
