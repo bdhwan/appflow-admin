@@ -208,6 +208,8 @@ export class AppService {
     public service = {
 
 
+
+
         //브랜드 목록 가져오기
         select_app_version_list: async (page_no, count_per_page) => {
             return await this.rest.get(this.getValue('api_server') + '/apps/select_app_version_list/' + page_no + '/' + count_per_page).toPromise();
@@ -224,8 +226,8 @@ export class AppService {
         },
 
         //select_meta_data
-        update_current_app_version: async (apps_version_idx) => {
-            return await this.rest.post(this.getValue('api_server') + '/apps/update_current_app_version', { apps_version_idx: apps_version_idx }).toPromise();
+        update_current_app_version: async (apps_idx, apps_version_idx) => {
+            return await this.rest.post(this.getValue('api_server') + '/apps/update_current_app_version', { apps_idx: apps_idx, apps_version_idx: apps_version_idx }).toPromise();
         },
 
         //select_meta_data

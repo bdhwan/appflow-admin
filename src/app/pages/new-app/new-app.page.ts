@@ -38,6 +38,9 @@ export class NewAppPage implements OnInit {
       git_user_pw: new FormControl(this.data.git_user_pw),
       endpoint: new FormControl(this.data.endpoint),
       cache_url: new FormControl(this.data.cache_url),
+      auto_update: new FormControl(this.data.auto_update),
+      android_link: new FormControl(this.data.android_link),
+      ios_link: new FormControl(this.data.ios_link)
     });
     this.readyToRender = true;
   }

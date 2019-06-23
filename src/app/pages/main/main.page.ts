@@ -45,6 +45,7 @@ export class MainPage implements OnInit {
   }
 
   async clickBuild() {
+    console.log('will trigger = ' + this.selected_apps_idx);
     const temp = await this.app.service.trigger_app_build(this.selected_apps_idx);
     this.refreshData();
   }
@@ -103,7 +104,7 @@ export class MainPage implements OnInit {
   }
 
   async clickEnable(apps_version_idx) {
-    await this.app.service.update_current_app_version(apps_version_idx);
+    await this.app.service.update_current_app_version(this.selected_apps_idx, apps_version_idx);
     this.refreshData();
   }
 

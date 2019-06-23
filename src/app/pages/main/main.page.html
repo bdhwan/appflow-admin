@@ -32,25 +32,27 @@
         <h6>git_url: {{selected_app.git_url}}</h6>
         <h6 *ngIf="selected_app.git_user_id">git_user_id: {{selected_app.git_user_id}}</h6>
         <h6 *ngIf="selected_app.git_user_pw">git_user_pw: <span>***</span></h6>
-
+        <h6>자동업데이트 : {{selected_app.auto_update?'켜짐 (커밋시 자동업데이트) ':'꺼짐 (수동)'}}</h6>
       </div>
 
       <div>
         <h3>설정</h3>
         <h4>Ionic</h4>
         <h6>ionic cordova plugin add cordova-plugin-ionic --save --variable APP_ID="{{selected_app.app_id}}" --variable CHANNEL_NAME="{{selected_app.channel_name}}" --variable UPDATE_METHOD="auto" --variable MAX_STORE="3" --variable UPDATE_API="{{selected_app.endpoint}}"</h6>
-
         <h4>Webhook</h4>
-        <h6>{{meta_data.build_server_url}}/apps/trigger_app_build/{{selected_apps_idx}}</h6>
-
+        <h6>{{selected_app.endpoint}}/apps/trigger_app_build/{{selected_apps_idx}}</h6>
       </div>
-
-
-
       <div>
-
-
+        <div>
+          <h3>Link</h3>
+          <h4>android: <a [attr.href]="selected_app.android_link">{{selected_app.android_link}}</a></h4>
+          <h4>ios: <a [attr.href]="selected_app.ios_link">{{selected_app.ios_link}}</a></h4>
+          <h4>cache_url: <a [attr.href]="selected_app.cache_url">{{selected_app.cache_url}}</a></h4>
+        </div>
       </div>
+
+
+
 
 
       <h1>Build history</h1>
@@ -58,11 +60,28 @@
         <ion-button (click)="clickBuild()">Build</ion-button>
       </div>
       <div *ngFor="let item of build_history">
+
         <div>
-          ID: {{item.build_history_idx}}, stauts:{{item.status}}, enabled: {{item.enabled}}<br>
-          log:{{item.log}}
-          <ion-button [hidden]="!item.apps_version_idx" (click)="clickEnable(item.apps_version_idx)">활성화</ion-button>
+          ID: {{item.build_history_idx}}, success: {{item.success}}<br>
+          <div *ngIf="item.status==='done'">
+            <div *ngIf="item.error">error:{{item.error}}</div>
+            <ion-button [hidden]="!item.apps_version_idx || item.enabled" (click)="clickEnable(item.apps_version_idx)">활성화</ion-button>
+            <div *ngIf="item.enabled">
+              <h2>이버전이 서비스중입니다</h2>
+            </div>
+          </div>
+          <div *ngIf="item.status==='building'">
+            <h6>빌드중입니다</h6>
+          </div>
+          <div *ngIf="item.status==='ready'">
+            <h6>빌드 대기 중입니다</h6>
+          </div>
+
+          <div>
+            등록일: {{item.regist_datetime}}
+          </div>
         </div>
+        <br>
       </div>
     </div>
   </ng-container>
