@@ -9,6 +9,12 @@
   <div *ngIf="readyToRender">
 
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+      <ion-item>
+        <ion-label>git_url</ion-label>
+        <ion-input type="text" formControlName="git_url" (focusout)="onBlurGitUrl()"></ion-input>
+      </ion-item>
+
       <ion-item>
         <ion-label>app_id</ion-label>
         <ion-input type="text" formControlName="app_id"></ion-input>
@@ -18,9 +24,10 @@
         <ion-input type="text" formControlName="channel_name"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label>git_url</ion-label>
-        <ion-input type="text" formControlName="git_url"></ion-input>
+        <ion-label>git_full_name</ion-label>
+        <ion-input type="text" formControlName="git_full_name"></ion-input>
       </ion-item>
+
 
       <ion-item>
         <ion-label>git git_user_id</ion-label>
@@ -33,7 +40,7 @@
 
       <ion-item>
         <ion-label>git_web_url</ion-label>
-        <ion-input type="text" formControlName="git_web_url"></ion-input>
+        <ion-input type="text" formControlName="git_web_url" (focusout)="onBlurWebGitUrl()"></ion-input>
       </ion-item>
 
       <ion-item>

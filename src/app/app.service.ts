@@ -128,6 +128,47 @@ export class AppService {
         },
 
 
+        extractFullName: (url) => {
+            const list = url.replace('http://', '').replace('https://', '').replace('.git', '').split('/');
+            console.log(list[list.length - 2] + '/' + list[list.length - 1])
+            return list[list.length - 2] + '/' + list[list.length - 1];
+        },
+
+        extractGitUrl: (url) => {
+            const list = url.split('@');
+            let targetUrl = '';
+            if (list.length == 1) {
+                targetUrl = url.replace('http://', '').replace('https://', '');
+            }
+            else {
+                targetUrl = list[1];
+            }
+            return targetUrl;
+        },
+        extractGitUserName: (url) => {
+            const list = url.split('@');
+            if (list.length == 2) {
+                return list[0].replace('http://', '').replace('https://', '');
+            }
+            return null;
+        },
+        extractChannelName: (data) => {
+            //bitbucket
+            if (data.push) {
+                return data.push.changes[0].new.name;
+            }
+            //github
+            else {
+                const temp = data.ref.split('/');
+                return temp[temp.length - 1];
+            }
+        },
+
+        extractFullNameFromPush: (data) => {
+            //bitbucket
+            return data.repository.full_name;
+        },
+
     }
 
     public ctrl = {

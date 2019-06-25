@@ -34,6 +34,7 @@ export class NewAppPage implements OnInit {
       app_id: new FormControl(this.data.app_id, [Validators.required]),
       channel_name: new FormControl(this.data.channel_name, [Validators.required]),
       git_url: new FormControl(this.data.git_url, [Validators.required]),
+      git_full_name: new FormControl(this.data.git_full_name),
       git_user_id: new FormControl(this.data.git_user_id),
       git_user_pw: new FormControl(this.data.git_user_pw),
       git_web_url: new FormControl(this.data.git_web_url),
@@ -43,10 +44,33 @@ export class NewAppPage implements OnInit {
       cache_url: new FormControl(this.data.cache_url),
       auto_update: new FormControl(this.data.auto_update),
       android_link: new FormControl(this.data.android_link),
+
       ios_link: new FormControl(this.data.ios_link)
     });
     this.readyToRender = true;
   }
+
+  onBlurGitUrl() {
+    console.log('onBlurGitUrl -' + this.registerForm.value.git_url);
+    const git_full_name = this.app.util.extractFullName(this.registerForm.value.git_url);
+    const git_url = this.app.util.extractGitUrl(this.registerForm.value.git_url);
+
+    this.registerForm.patchValue({
+      git_full_name: git_full_name,
+      git_url: git_url
+    })
+  }
+
+
+  onBlurWebGitUrl() {
+    const git_web_url = this.app.util.extractGitUrl(this.registerForm.value.git_web_url);
+
+    this.registerForm.patchValue({
+      git_web_url: git_web_url
+    })
+  }
+
+
 
   async onSubmit() {
     console.log("onSubmit =", this.registerForm.value);
