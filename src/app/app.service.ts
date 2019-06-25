@@ -258,7 +258,7 @@ export class AppService {
 
         //request build
         trigger_app_build: async (apps_idx) => {
-            return await this.rest.get(this.getValue('api_server') + '/apps/trigger_app_build/' + apps_idx).toPromise();
+            return await this.rest.get(this.getValue('api_server') + '/apps/trigger_app_build_with_apps_idx/' + apps_idx).toPromise();
         },
 
         //select_meta_data
